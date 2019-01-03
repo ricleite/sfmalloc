@@ -50,7 +50,7 @@ libsfmalloc.a: $(OBJS)
 	$(RANLIB) $@
 
 libsfmalloc.so: $(SHARED_OBJS)
-	$(CXX) -shared $(LIBS) -o $@ $(SHARED_OBJS) 
+	$(CXX) -shared -o $@ $(SHARED_OBJS) $(LIBS)
 
 clean:
 	rm -f *.o $(LIB_MALLOC)
