@@ -5,7 +5,7 @@ AR      = ar
 RANLIB  = ranlib
 
 OBJS = sf_malloc.o sf_malloc_new.o sf_malloc_wrapper.o
-SHARED_OBJS = sf_malloc_shared.o sf_malloc_new_shared.o sf_malloc_init_shared.o \
+SHARED_OBJS = sf_malloc_shared.o sf_malloc_new_shared.o \
               sf_malloc_wrapper_shared.o
 LIBS = -lpthread -lrt -ldl
 LIB_MALLOC = libsfmalloc.a libsfmalloc.so
@@ -25,7 +25,7 @@ CXXFLAGS = $(OPT_FLAGS) $(INC_FLAGS) $(DEFS)
 all: $(LIB_MALLOC)
 
 sf_malloc.o: sf_malloc.c sf_malloc.h sf_malloc_def.h sf_malloc_ctrl.h sf_malloc_atomic.h
-	$(CC) $(CFLAGS) -DMALLOC_NEED_INIT -DMALLOC_USE_STATIC_LINKING -c $<
+	$(CC) $(CFLAGS) -DMALLOC_USE_STATIC_LINKING -c $<
 
 sf_malloc_shared.o: sf_malloc.c sf_malloc.h sf_malloc_def.h sf_malloc_ctrl.h sf_malloc_atomic.h
 	$(CC) $(CFLAGS) -DPIC -fPIC -c $< -o $@
@@ -40,9 +40,6 @@ sf_malloc_new.o: sf_malloc_new.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 
 sf_malloc_new_shared.o: sf_malloc_new.cpp
-	$(CXX) $(CXXFLAGS) -DPIC -fPIC -c $< -o $@
-
-sf_malloc_init_shared.o: sf_malloc_init.cpp
 	$(CXX) $(CXXFLAGS) -DPIC -fPIC -c $< -o $@
 
 libsfmalloc.a: $(OBJS)

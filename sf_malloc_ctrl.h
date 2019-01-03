@@ -50,7 +50,8 @@
 /* For statistics */
 //#define MALLOC_STATS
 
-//#define MALLOC_NEED_INIT
+// allocator needs to be lazy-initialized on first malloc call
+#define MALLOC_NEED_INIT
 //#define MALLOC_NEED_THREAD_INIT
 //#define MALLOC_USE_STATIC_LINKING
 
